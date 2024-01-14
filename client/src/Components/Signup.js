@@ -6,7 +6,9 @@ import axios from "axios";
 import { Alert } from "@mui/material";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 function Signup() {
+  const [passvisible, setpassvisible] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirm, setconfirm] = useState("");
@@ -135,18 +137,30 @@ function Signup() {
               value={email}
             />
           </div>
-          <div>
+          <div className="relative">
             <TextField
               variant="outlined"
               label="Password"
               className="w-80"
-              type="password"
+              type={passvisible ? "text" : "password"}
               placeholder="Password"
               onChange={(e) => {
                 setpassword(e.target.value);
               }}
               value={password}
             />
+            <div className="absolute top-4 right-3">
+              {" "}
+              {passvisible ? (
+                <div onClick={() => setpassvisible(!passvisible)}>
+                  <Visibility />{" "}
+                </div>
+              ) : (
+                <div onClick={() => setpassvisible(!passvisible)}>
+                  <VisibilityOff />
+                </div>
+              )}
+            </div>
           </div>
           <div className="mt-4">
             <TextField

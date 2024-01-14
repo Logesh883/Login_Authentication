@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import { motion } from "framer-motion";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [msg, setmsg] = useState("");
   const [alert, setalert] = useState("");
   const navigate = useNavigate();
+  const [passvisible, setpassvisible] = useState("");
 
   const Run = async () => {
     var validRegex =
@@ -113,9 +115,9 @@ function Login() {
               defaultValue={email}
             />
           </div>
-          <div>
+          <div className="relative  ">
             <TextField
-              type="password"
+              type={passvisible ? "text" : "password"}
               variant="outlined"
               label="Password"
               className="w-80"
@@ -124,6 +126,18 @@ function Login() {
               }}
               defaultValue={password}
             />
+            <div className="absolute top-4 right-3">
+              {" "}
+              {passvisible ? (
+                <div onClick={() => setpassvisible(!passvisible)}>
+                  <Visibility />{" "}
+                </div>
+              ) : (
+                <div onClick={() => setpassvisible(!passvisible)}>
+                  <VisibilityOff />
+                </div>
+              )}
+            </div>
           </div>
 
           <Stack className="my-4">
